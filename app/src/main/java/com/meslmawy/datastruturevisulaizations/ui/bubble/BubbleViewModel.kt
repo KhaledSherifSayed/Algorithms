@@ -8,7 +8,6 @@ import com.meslmawy.datastruturevisulaizations.models.BubbleItem
 
 
 class BubbleViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
     private var _unSortedData = MutableLiveData<List<BubbleItem>>()
     val unSortedData: LiveData<List<BubbleItem>>
         get() = _unSortedData
