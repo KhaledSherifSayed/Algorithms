@@ -1,0 +1,67 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+<data>
+
+    <variable
+        name="viewModel"
+        type="com.meslmawy.datastruturevisulaizations.ui.home.HomeViewModel" />
+</data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="true"
+    android:paddingBottom="@dimen/spacing_normal"
+    tools:context=".ui.home.HomeFragment">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="4:2.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/behind" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:padding="@dimen/margin_quar"
+        android:text="@string/sort"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textsize_smlarge"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/image" />
+
+    <TextView
+        android:id="@+id/intro_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:padding="@dimen/margin_half"
+        android:text="@string/sorting_desc"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="@dimen/textsize_small"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sort_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/margin_wide"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/intro_text"
+        tools:listitem="@layout/dsitem_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

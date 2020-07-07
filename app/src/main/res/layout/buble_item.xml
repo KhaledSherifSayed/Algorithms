@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.meslmawy.datastruturevisulaizations.models.BubbleItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_half">
+
+        <TextView
+            android:id="@+id/bubble_item"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/profile_image_background"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:text="@{item.data.toString()}"
+            app:bindImageBackground="@{item}"
+            app:layout_constraintBottom_toTopOf="@+id/arrow"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_quar"
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_top"
+            android:tint="@color/black"
+            app:arrowVisibility="@{item}"
+            app:layout_constraintEnd_toEndOf="@+id/bubble_item"
+            app:layout_constraintStart_toStartOf="@+id/bubble_item"
+            app:layout_constraintTop_toBottomOf="@+id/bubble_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
