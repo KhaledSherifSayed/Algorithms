@@ -22,6 +22,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.meslmawy.datastruturevisulaizations.R
 import com.meslmawy.datastruturevisulaizations.models.BubbleItem
 import java.util.*
 
@@ -31,11 +32,23 @@ import java.util.*
 fun bindImageBackground(textView: TextView, item: BubbleItem?) {
     if (item != null) {
         if (item.fullySorted == false)
-            textView.setBackgroundColor((Color.parseColor("#ffc107")))
+            textView.setBackgroundResource(R.drawable.circle)
         else
-            textView.setBackgroundColor((Color.parseColor("#c79100")))
+            textView.setBackgroundResource(R.drawable.sorted_circle)
     }
 }
+
+@BindingAdapter("bindTextViewColor")
+fun bindTextViewColor(textView: TextView, item: BubbleItem?) {
+    if (item != null) {
+        if (item.fullySorted == false)
+            textView.setTextColor((Color.parseColor("#ffffff")))
+        else
+            textView.setTextColor((Color.parseColor("#000000")))
+    }
+}
+
+
 
 
 @BindingAdapter("arrowVisibility")

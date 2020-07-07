@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.meslmawy.datastruturevisulaizations.databinding.BubbleFragmentBinding
 import com.meslmawy.datastruturevisulaizations.ui.adapters.DSBubbleAdapter

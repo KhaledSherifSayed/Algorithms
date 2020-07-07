@@ -16,17 +16,17 @@
 
         <TextView
             android:id="@+id/bubble_item"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/profile_image_background"
-            android:gravity="center_vertical|center_horizontal"
-            android:textColor="@color/black"
-            android:textSize="12sp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:gravity="center"
             android:text="@{item.data.toString()}"
+            android:textSize="12sp"
             app:bindImageBackground="@{item}"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/arrow"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/arrow"

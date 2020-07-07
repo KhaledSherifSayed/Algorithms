@@ -129,7 +129,7 @@ class BubbleViewModel : ViewModel() {
             }
             if (newList2[iterate2 - 1].data!! > newList2[iterate2].data!!) {
                 //swap elements
-                mText!!.value = " ${newList2[iterate2].data!!} is smaller than  ${newList2[iterate2 - 1].data!!} , so the numbers get swapped"
+                mText!!.value = " ${newList2[iterate2].data!!} is smaller than  ${newList2[iterate2 - 1].data!!} , so the numbers get swapped."
                 val x = newList2[iterate2 - 1]
                 newList2[iterate2 - 1] = newList2[iterate2]
                 newList2[iterate2] = x
@@ -137,7 +137,7 @@ class BubbleViewModel : ViewModel() {
                 val refreshlist = ArrayList(newList2)
                 _unSortedData.value = refreshlist
             } else
-                mText!!.value = " ${newList2[iterate2].data!!} is greater ${newList2[iterate2 - 1].data!!} , so the numbers don't get swapped"
+                mText!!.value = " ${newList2[iterate2].data!!} is greater ${newList2[iterate2 - 1].data!!} , so the numbers don't get swapped."
             iterate2++
         }
         else {
@@ -151,9 +151,10 @@ class BubbleViewModel : ViewModel() {
                 alarmTimer.cancel()
                 mText!!.value = "Sorting is complete."
                 run_enabled?.value = false
+                step_enabled?.value = false
             }
             else {
-                mText!!.value = " ${newList2[iterate2- 1].data!!} on the right edge is considered fully sorted "
+                mText!!.value = " ${newList2[iterate2- 1].data!!} on the right edge is considered fully sorted."
                 newList2[iterate2 - 1].fullySorted = true
                 newList2[iterate2 - 1].iterate = false
                 newList2[iterate2 - 2].iterate = false
