@@ -50,8 +50,12 @@ class BubbleFragment : Fragment() {
         binding.resetButton.setOnClickListener {
             viewModel.resetData()
         }
+
+        binding.stepButton.setOnClickListener {
+            viewModel.stepData()
+        }
         viewModel.getText()?.observe(viewLifecycleOwner,
-            Observer<String?> { s ->
+            Observer { s ->
                 binding.sortingDesMethods.text = s
             })
 
@@ -76,6 +80,18 @@ class BubbleFragment : Fragment() {
                     binding.runButton.alpha = .5f
 
                     binding.runButton.isEnabled = s
+                }
+            })
+
+        viewModel.getStepEnabled()?.observe(viewLifecycleOwner,
+            Observer { s ->
+                if (s != null) {
+                    if(s)
+                        binding.stepButton.alpha = 1f
+                    else
+                        binding.stepButton.alpha = .5f
+
+                    binding.stepButton.isEnabled = s
                 }
             })
         return binding.root
