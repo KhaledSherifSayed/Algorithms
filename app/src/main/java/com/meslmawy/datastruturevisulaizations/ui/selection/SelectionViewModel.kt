@@ -1,4 +1,4 @@
-package com.meslmawy.datastruturevisulaizations.ui.bubble
+package com.meslmawy.datastruturevisulaizations.ui.selection
 
 import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.meslmawy.datastruturevisulaizations.models.BubbleItem
 
-
-class BubbleViewModel : ViewModel() {
+class SelectionViewModel : ViewModel() {
 
     private lateinit var alarmTimer: CountDownTimer
     private var _unSortedData = MutableLiveData<List<BubbleItem>>()
@@ -21,10 +20,11 @@ class BubbleViewModel : ViewModel() {
 
     private var myList: ArrayList<BubbleItem> = ArrayList()
     private var newList2: ArrayList<BubbleItem> = ArrayList()
-    var listSize: Int?= null
+    var listSize: Int? = null
 
-    var iterate1 = 0
-    var iterate2 = 1
+    private var iterate1 = 0
+    private var min_idx = 0
+    private var iterate2 = 1
 
     companion object {
         // This is the number of milliseconds in a second
@@ -41,7 +41,7 @@ class BubbleViewModel : ViewModel() {
         run_enabled = MutableLiveData()
         step_enabled = MutableLiveData()
         _unSortedData.value = ArrayList()
-        var bubbleItem = BubbleItem(1, 100, false, false)
+        var bubbleItem = BubbleItem(1, 1, false, false)
         myList.add(bubbleItem)
         bubbleItem = BubbleItem(2, 7, false, false)
         myList.add(bubbleItem)
@@ -49,42 +49,39 @@ class BubbleViewModel : ViewModel() {
         myList.add(bubbleItem)
         bubbleItem = BubbleItem(4, 6, false, false)
         myList.add(bubbleItem)
-        bubbleItem = BubbleItem(5, 3, false, false)
+        bubbleItem = BubbleItem(5, 7, false, false)
         myList.add(bubbleItem)
         bubbleItem = BubbleItem(6, 2, false, false)
         myList.add(bubbleItem)
-        bubbleItem = BubbleItem(7, 1, false, false)
+        bubbleItem = BubbleItem(7, 100, false, false)
         myList.add(bubbleItem)
         bubbleItem = BubbleItem(8, 9, false, false)
         myList.add(bubbleItem)
-        myList.shuffle()
+        //myList.shuffle()
         iterateInitial(myList)
         newList2 = ArrayList(myList)
         listSize = newList2.size
-        mText!!.value = "Bubble sort is one algorithms used to sort a sequence of numbers"
+        mText!!.value = "Selection sort is one algorithms used to sort a sequence of numbers"
         reset_enabled!!.value = false
         run_enabled!!.value = true
     }
 
     private fun iterateInitial(list: ArrayList<BubbleItem>) {
-        list[0].iterate = true
-        list[1].iterate = true
         _unSortedData.value = list
     }
 
     fun resetData() {
         iterate1 = 0
+        min_idx = 0
         iterate2 = 1
         reset_enabled?.value = false
         run_enabled?.value = true
         step_enabled?.value = true
-        mText!!.value = "Bubble sort is one algorithms used to sort a sequence of numbers"
+        mText!!.value = "Selection sort is one algorithms used to sort a sequence of numbers"
         alarmTimer.cancel()
         makeAllUnIterated()
         myList.shuffle()
         newList2 = ArrayList(myList)
-        newList2[0].iterate = true
-        newList2[1].iterate = true
         _unSortedData.value = newList2
     }
 
@@ -97,20 +94,21 @@ class BubbleViewModel : ViewModel() {
             override fun onTick(millisUntilFinished: Long) {
                 sortFunction()
             }
-            override fun onFinish() {
 
+            override fun onFinish() {
             }
         }
         alarmTimer.start()
     }
 
-    fun stepData(){
+    fun stepData() {
         reset_enabled?.value = true
         run_enabled?.value = true
         alarmTimer = object : CountDownTimer(ALARM_Step_TIME, ONE_SECOND) {
             override fun onTick(millisUntilFinished: Long) {
                 sortFunction()
             }
+
             override fun onFinish() {
 
             }
@@ -118,53 +116,37 @@ class BubbleViewModel : ViewModel() {
         alarmTimer.start()
     }
 
-    fun sortFunction(){
-
-        if(iterate2 < listSize?.minus(iterate1)!!){
-            if (iterate2 > 1) {
+    fun sortFunction() {
+        if (iterate1 < listSize!!) {
+            if(iterate1 == 0 && iterate2 == 1)
+                mText!!.value = "Using linear Search to get smallest value in unsorted Array"
+            if (iterate2 < listSize!!) {
                 newList2[iterate2].iterate = true
-                newList2[iterate2 - 1].iterate = true
-                newList2[iterate2 - 2].iterate = false
+                if (newList2[iterate2].data!! < newList2[min_idx].data!!) {
+                    min_idx = iterate2
+                    mText!!.value = "${newList2[min_idx].data!!} is the smallest number in unsorted array comparable to ${newList2[iterate1].data}"
+                }
                 val refreshlist = ArrayList(newList2)
                 _unSortedData.value = refreshlist
-            }
-            if (newList2[iterate2 - 1].data!! > newList2[iterate2].data!!) {
-                //swap elements
-                mText!!.value = " ${newList2[iterate2].data!!} is smaller than  ${newList2[iterate2 - 1].data!!} , so the numbers get swapped."
-                val x = newList2[iterate2 - 1]
-                newList2[iterate2 - 1] = newList2[iterate2]
-                newList2[iterate2] = x
-                myList = newList2
+                iterate2++
+            } else {
+                val x = newList2[min_idx]
+                if (x != newList2[iterate1] && x.data!! < newList2[iterate1].data!!) {
+                    newList2[min_idx] = newList2[iterate1]
+                    newList2[iterate1] = x
+                }
+                newList2[iterate1].fullySorted = true
+                mText!!.value = "${newList2[iterate1].data!!} on the left edge is considered fully sorted."
+                makeAllUnIteratedwithSort()
                 val refreshlist = ArrayList(newList2)
                 _unSortedData.value = refreshlist
-            } else
-                mText!!.value = " ${newList2[iterate2].data!!} is greater ${newList2[iterate2 - 1].data!!} , so the numbers don't get swapped."
-            iterate2++
-        }
-        else {
-            if (iterate2 == 1) {
-                newList2[iterate2].fullySorted = true
-                newList2[iterate2].iterate = false
-                newList2[iterate2-1].fullySorted = true
-                newList2[iterate2-1].iterate = false
-                val refreshlist = ArrayList(newList2)
-                _unSortedData.value = refreshlist
-                alarmTimer.cancel()
-                mText!!.value = "Sorting is complete."
-                run_enabled?.value = false
-                step_enabled?.value = false
-            }
-            else {
-                mText!!.value = " ${newList2[iterate2- 1].data!!} on the right edge is considered fully sorted."
-                newList2[iterate2 - 1].fullySorted = true
-                newList2[iterate2 - 1].iterate = false
-                newList2[iterate2 - 2].iterate = false
-                iterate2 = 1
                 iterate1++
-                newList2[iterate2].iterate = true
-                newList2[iterate2 - 1].iterate = true
-                val refreshlist = ArrayList(newList2)
-                _unSortedData.value = refreshlist
+                min_idx = iterate1
+                iterate2 = iterate1 + 1
+                if(iterate1 == listSize) {
+                    alarmTimer.cancel()
+                    mText!!.value = "Sorting is complete."
+                }
             }
         }
     }
@@ -176,6 +158,11 @@ class BubbleViewModel : ViewModel() {
         }
     }
 
+    fun makeAllUnIteratedwithSort() {
+        newList2.forEach {
+            it.iterate = false
+        }
+    }
 
     fun getText(): LiveData<String?>? {
         return mText
@@ -184,9 +171,11 @@ class BubbleViewModel : ViewModel() {
     fun getResetEnabled(): LiveData<Boolean?>? {
         return reset_enabled
     }
+
     fun getRunEnabled(): LiveData<Boolean?>? {
         return run_enabled
     }
+
     fun getStepEnabled(): LiveData<Boolean?>? {
         return step_enabled
     }

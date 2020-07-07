@@ -16,6 +16,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_home_to_selectionFragment"
+            app:destination="@id/selectionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -24,5 +31,10 @@
         android:label="q_r_login_fragment"
         tools:layout="@layout/bubble_fragment" >
     </fragment>
+    <fragment
+        android:id="@+id/selectionFragment"
+        android:name="com.meslmawy.datastruturevisulaizations.ui.selection.SelectionFragment"
+        android:label="selection_fragment"
+        tools:layout="@layout/selection_fragment" />
 
 </navigation>

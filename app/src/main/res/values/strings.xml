@@ -3,4 +3,7 @@
     <string name="sort">Sort</string>
     <string name="sorting_desc">A Sorting Algorithm is used to rearrange a given array or list elements according to a comparison operator on the elements. The comparison operator is used to decide the new order of element in the respective data structure.
     </string>
+    <string name="step">Step</string>
+    <string name="run">Run</string>
+    <string name="reset">Reset</string>
 </resources>

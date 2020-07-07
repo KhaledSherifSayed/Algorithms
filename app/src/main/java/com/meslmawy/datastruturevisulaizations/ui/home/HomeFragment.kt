@@ -38,9 +38,10 @@ class HomeFragment : Fragment() {
     private fun setupAdapter(){
         dsItemAdapter = DSItemAdapter(DSItemCallBack { item ->
             when (item.id) {
-                1 -> {
-                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeToBubbleSort())
-                }
+                1 -> view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeToBubbleSort())
+
+                2 ->
+                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeToSelectionFragment())
             }
         })
         // Sets the adapter of the RecyclerView
