@@ -16,7 +16,7 @@
     <th>Main Screen</th>
   </tr>
   <tr>
-    <td><img src="screens/main_screen.png"/></td>
+    <td><img src="screens/main_screen.png" height="700"/></td>
   </tr>
 </table>
 
